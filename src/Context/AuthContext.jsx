@@ -16,7 +16,7 @@ export default function AuthContextProvider({children}){
     const [user, setuser] = useState({});
     const [data, setdata] = useState([]);   
     function handleLogin(){
-        console.log("authin");
+        // console.log("authin");
         const provider=new GoogleAuthProvider()
         signInWithPopup(auth,provider)
     }

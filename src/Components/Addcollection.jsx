@@ -24,7 +24,7 @@ const Addcollection = () => {
              const querySnapshot = await getDocs(collection(db, "collection"));
          querySnapshot.forEach((doc) => {
            // doc.data() is never undefined for query doc snapshots
-           console.log(doc.id, " => ", doc.data());
+          //  console.log(doc.id, " => ", doc.data());
            arr.push(doc.id)
          
          });
@@ -33,7 +33,7 @@ const Addcollection = () => {
            getDocss()
            
          }, [coll]);
-         console.log(collectionList)
+        //  console.log(collectionList)
   return (
     <Flex  gap="1rem" w="20vw" flexDir={"column"}>
     <FormLabel textAlign={"center"} >Add a collection Name</FormLabel>

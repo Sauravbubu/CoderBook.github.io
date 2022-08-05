@@ -59,11 +59,11 @@ export function ResultDrawer({ text }) {
 
           <DrawerHeader>
             {" "}
-            {searchdata !== [] ? "Search Results" : "Try something different"}
+            {searchdata[0] ? "Search Results" : "Try something different"}
           </DrawerHeader>
 
           <DrawerBody>
-            {searchdata !== [] ? (
+            {searchdata[0] ? (
               <>
                 {searchdata.map((el, i) => (
                   <Qcard
