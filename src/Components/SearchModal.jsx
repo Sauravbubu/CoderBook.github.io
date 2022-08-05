@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../Context/SeachContex";
 
 import { Button, Text, useDisclosure } from "@chakra-ui/react";
@@ -16,12 +16,14 @@ import {
   DrawerCloseButton,
 } from "@chakra-ui/react";
 import Qcard from "./Qcard";
-import { data } from "../data";
+import axios from "axios";
+
 
 export function ResultDrawer({ text }) {
   const { setsearchdata, searchdata } = useContext(SearchContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  const [data, setdata] = useState([]);
   const [loadingState, setloadingState] = useState(false)
   function handleclick() {
     const arr = [];
@@ -38,10 +40,18 @@ setloadingState(true);
     
 setTimeout(() => {
   setloadingState(false)
-}, 500);
+}, 0);
    
     onOpen();
   }
+
+  useEffect(() => {
+    axios.get('https://mini-db.herokuapp.com/api/questions').then((res)=>{
+      const arr=res.data
+      setdata(arr)
+    })
+    
+  }, []);
   return (
     <>
       <Button

@@ -1,0 +1,17 @@
+export const List=[
+    "Array",
+    "Matrix",
+    "String",
+    "Search & Sort",
+    "Linked List",
+    "Binary Trees",
+    "BST",
+    "Greedy",
+    "BackTracking",
+    "Stacks & Queues",
+    "Heap",
+    "Graph",
+    "Trie",
+    "Dynamic Programming",
+    "Bit Manipulation",
+  ]
