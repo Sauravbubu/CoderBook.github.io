@@ -22,7 +22,7 @@ const TabPannel = () => {
   return (
     <Flex>
       <Tabs>
-        <TabList bg="purple.700"  color="white" w="100vw" >
+        <TabList bg="purple.600"  color="white" w="100vw" >
           {data?.map((el, i) => (
             <Tab gap="-1rem" key={i} overflow="hidden" fontSize={["xs","xs","sm"]} >
               

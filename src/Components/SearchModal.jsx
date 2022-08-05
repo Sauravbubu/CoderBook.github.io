@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SearchContext } from "../Context/SeachContex";
 
 import { Button, Text, useDisclosure } from "@chakra-ui/react";
@@ -22,18 +22,24 @@ export function ResultDrawer({ text }) {
   const { setsearchdata, searchdata } = useContext(SearchContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  const [loadingState, setloadingState] = useState(false)
   function handleclick() {
     const arr = [];
-
+setloadingState(true);
     data.map((e, i) =>
       e.questions.map((el) => {
-        if (el.Problem.includes(text)) {
+        if (el.Problem.toLowerCase().includes(text.toLowerCase())) {
+          
           arr.push(el);
         }
       })
     );
     setsearchdata(arr);
-
+    
+setTimeout(() => {
+  setloadingState(false)
+}, 500);
+   
     onOpen();
   }
   return (
@@ -43,6 +49,7 @@ export function ResultDrawer({ text }) {
         colorScheme="teal"
         size={["sm", "sm", "md"]}
         onClick={handleclick}
+        isLoading={loadingState}
       >
         Search
       </Button>

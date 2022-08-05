@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AddIcon, ExternalLinkIcon, PlusSquareIcon, StarIcon } from "@chakra-ui/icons";
-import { Flex, Button,ButtonGroup, Box, Link, Text, IconButton } from "@chakra-ui/react";
+import { Flex, Button,ButtonGroup, Box, Link, Text, IconButton, Tooltip } from "@chakra-ui/react";
 import { db } from "../FireBase";
 import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
@@ -37,6 +37,7 @@ const Qcard = ({ problem, URL, Done }) => {
     } else {
       alert("Login To Bookmark");
     }
+    setdone(true)
   };
 
   //deleteBookmark
@@ -63,18 +64,23 @@ const Qcard = ({ problem, URL, Done }) => {
         <Text fontSize={["sm", "md", "xl"]} fontWeight="bold">
           {problem}
         </Text>
+
         <Box mt="1rem">
+        <Tooltip  placement='left' ml="2rem" label='Go to GeeksForGeeks' stylefontSize='md' aria-label='Theme'>
           <Link
-            bg="purple.500"
-            borderRadius="xl"
+            bg="#1194D4"
+            borderRadius="lg"
             color="whitesmoke"
             p="0.31em"
             pr="-30px"
             href={URL}
             isExternal
           >
-            Solve Now <ExternalLinkIcon mx="2px" />
+            Solve Now 
+
+            <ExternalLinkIcon mx="2px" />
           </Link>
+        </Tooltip>
         </Box>
       </Flex>
       <Flex
@@ -85,16 +91,18 @@ const Qcard = ({ problem, URL, Done }) => {
       >
         <Button
           size={["sm", "xs", "md"]}
-          bg={!done ? "pink.700" : "green.600"}
+          bg={!done ? "#FEAC08" : "green.600"}
           onClick={() => handleDone(problem)}
           color="white"
         >
-          {done ? "completed" : "Pending"}
+          {done ? "added to Completed" : "Pending"}
         </Button>
         <Flex align="center">
          
           <ButtonGroup size='sm' isAttached variant='outline'>
-  <Button isLoading={bookmark}  onClick={() => handleBookmark(problem)}>Save</Button>
+          <Tooltip  placement='left' ml="2rem" label='Add Bookmark' stylefontSize='md' aria-label='Theme'>
+
+  <Button isLoading={bookmark}  onClick={() => handleBookmark(problem)}>Save</Button></Tooltip>
   <IconButton onClick={() => handleBookmark(problem)} aria-label='Add to friends' icon={<AddIcon />} />
 </ButtonGroup>
         </Flex>

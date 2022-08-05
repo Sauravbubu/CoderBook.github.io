@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import { ExternalLinkIcon, PlusSquareIcon, StarIcon } from "@chakra-ui/icons";
-import { Flex, Button, Box, Link, Text, Accordion } from "@chakra-ui/react";
+import { DeleteIcon, ExternalLinkIcon, PlusSquareIcon, StarIcon } from "@chakra-ui/icons";
+import { Flex, Button, Box, Link, Text, Accordion, Tooltip } from "@chakra-ui/react";
 import { db } from "../FireBase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { AuthContext } from "../Context/AuthContext";
@@ -47,13 +47,21 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
   };
 
   //deleteBookmark
-
+  const bookmarkRef = doc(db,`${user?.email}`,);
+  const deleteBookmark = async (problem) => {
+    try {
+      const results = fdata.filter((item) => item.problem !== problem);
+      await updateDoc(bookmarkRef, { completed: results });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Flex
       boxShadow="Inner"
       w="90%"
-      ml=".5rem"
-      mr="1rem"
+      m="auto"
+    
       border="1px"
       borderColor="lightblue"
       mb="1rem"
@@ -87,8 +95,8 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
             bg="blackAlpha.500"
             borderRadius="lg"
             color="whitesmoke"
-            p="0.6em"
-            
+            p="0.2em"
+            fontSize={["sm", "xs", "md"]}
             href={`https://${solution}`}
             isExternal
           >
@@ -120,6 +128,13 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
           >
             Bookmark it
           </Button>{" "}
+
+          <Tooltip  placement='left' ml="2rem" label='delete' stylefontSize='md' aria-label='Theme'>
+
+          <Button onClick={() => deleteBookmark(problem)}>
+              <DeleteIcon />
+            </Button>
+            </Tooltip>
         </Flex>
       </Flex>
     </Flex>

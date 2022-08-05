@@ -4,6 +4,10 @@ import { ResultDrawer } from './SearchModal';
 
 const SearchInput = () => {
     const [text, settext] = useState("");
+
+
+
+    
   return (
     <>
     <Input
@@ -13,7 +17,7 @@ const SearchInput = () => {
             }}
             placeholder="Search Question"
           />
-           <ResultDrawer text={text} />
+           <ResultDrawer text={text.toLowerCase()} />
            </>
   )
 }

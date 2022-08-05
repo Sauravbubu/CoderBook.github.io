@@ -11,6 +11,7 @@ import {
   useColorMode,
   useDisclosure,
   Image,
+  Tooltip,
 } from "@chakra-ui/react";
 import { db } from "../../FireBase";
 import { AuthContext } from "../../Context/AuthContext";
@@ -91,9 +92,12 @@ const Account = () => {
                 </Link>
               </Box>
             </Flex>
+            <Tooltip   placement='left' ml="2rem" label='Delete' stylefontSize='md' aria-label='Theme'>
+
             <Button onClick={() => deleteBookmark(el.problem)}>
               <DeleteIcon />
             </Button>
+            </Tooltip>
           </Flex>
         ))}
       </Flex>

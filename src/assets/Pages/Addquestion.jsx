@@ -35,7 +35,7 @@ const Addquestion = () => {
   useEffect(() => {
     const arr = [];
     async function getDocss() {
-      const querySnapshot = await getDocs(collection(db, "collection"));
+      const querySnapshot = await getDocs(collection(db, user.email));
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
@@ -46,17 +46,10 @@ const Addquestion = () => {
     getDocss();
     // console.log(coll)
   }, [coll]);
-  // console.log(collectionList)
-
-  // setDoc(doc(db,"user",currentUser.email),{
-  //     bookmarked:[],
-  //     completed:[],
-  //     ownquestions:[],
-  // })
-
+//  console.log(collectionList)
   const handleSubmit = async () => {
     console.log(collectionn);
-    const userId = doc(db, "collection", `${collectionn}`);
+    const userId = doc(db, user.email, `${collectionn}`);
     console.log(level, collectionadd, collectionn, url, title, solution, Notes);
 
     if (user?.email) {

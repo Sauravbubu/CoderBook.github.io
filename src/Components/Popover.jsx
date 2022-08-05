@@ -15,6 +15,7 @@ import {
     Portal,
     Text,
     Flex,
+    Tooltip,
     
   } from '@chakra-ui/react'
   import {Link} from 'react-router-dom'
@@ -26,7 +27,11 @@ const PopHover = () => {
    
     <Popover>
   <PopoverTrigger>
-    <Button variant={"none"}><SettingsIcon/></Button>
+
+    <Button variant={"none"}>
+
+        
+    <SettingsIcon/>Settings  </Button> 
   </PopoverTrigger>
   <Portal >
     <PopoverContent  w="400px">
