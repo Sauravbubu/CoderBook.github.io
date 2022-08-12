@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../FireBase";
 import { useNavigate } from "react-router-dom";
-import { setDoc, doc, updateDoc } from "firebase/firestore";
+import { setDoc, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import axios from "axios";
 import { Tooltip } from '@chakra-ui/react'
 
@@ -20,6 +20,7 @@ export default function AuthContextProvider({ children }) {
   const [topic, settopic] = useState("");
   const [user, setuser] = useState({});
   const [data, setdata] = useState([]);
+  const [Owndata, setOwndata] = useState([]);
   function handleLogin() {
     // console.log("authin");
     const provider = new GoogleAuthProvider();
@@ -33,7 +34,7 @@ export default function AuthContextProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 
-      
+      console.log(topic)
       setuser(currentUser);
       axios
         .get("https://mini-db.herokuapp.com/api/users")
@@ -76,18 +77,18 @@ export default function AuthContextProvider({ children }) {
           console.log(error);
         });
     });
-
+   
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [topic]);
 
   useEffect(() => {}, [data]);
   // console.log("user",user);
 
   return (
     <AuthContext.Provider
-      value={{ user, handleLogin, Logout, setcoll, coll, topic, settopic }}
+      value={{ user, handleLogin,Owndata,setOwndata ,Logout, setcoll, coll, topic, settopic }}
     >
       {children}
     </AuthContext.Provider>

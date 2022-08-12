@@ -37,6 +37,7 @@ const Home = () => {
       justifyContent="center"
     >
       {/* <Banner/> */}
+
       <NavBar />
       <TabPannel />
     </Box>

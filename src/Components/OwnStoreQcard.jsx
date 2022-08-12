@@ -2,27 +2,17 @@ import React, { useState, useContext } from "react";
 import { DeleteIcon, ExternalLinkIcon, PlusSquareIcon, StarIcon } from "@chakra-ui/icons";
 import { Flex, Button, Box, Link, Text, Accordion, Tooltip } from "@chakra-ui/react";
 import { db } from "../FireBase";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc,deleteDoc,deleteField } from "firebase/firestore";
 import { AuthContext } from "../Context/AuthContext";
 import Acordion from "./Acordion";
-// import { async } from '@firebase/util'
-// level
-// "easy"
-// notes
-// "nice"
-// solution
-// "www.google.com"
-// title
-// "fibonnacci"
-// url
-// "www.course.masai.com"
+
 
 const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
     console.log(problem, URL, level,notes,solution);
   const [done, setdone] = useState(false);
   const [bookmark, setbookmark] = useState(false);
-  const { user } = useContext(AuthContext);
-
+  const { user,topic,Owndata,setOwndata,coll,setcoll } = useContext(AuthContext);
+console.log(Owndata);
   const userId = doc(db, "user", `${user?.email}`);
   //  console.log(user?.email,"Qcard")
   const handleBookmark = async (problem) => {
@@ -47,11 +37,13 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
   };
 
   //deleteBookmark
-  const bookmarkRef = doc(db,`${user?.email}`,);
+  const bookmarkRef = doc(db, user.email, `${topic}`);
   const deleteBookmark = async (problem) => {
     try {
-      const results = fdata.filter((item) => item.problem !== problem);
-      await updateDoc(bookmarkRef, { completed: results });
+      const results = Owndata.filter((item) => item.title !== problem);
+      console.log(results)
+      await updateDoc(bookmarkRef, { questions: results });
+      setcoll(!coll)
     } catch (error) {
       console.log(error);
     }

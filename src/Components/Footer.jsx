@@ -20,12 +20,12 @@ export const Footer = ({position="absolute"}) => {
         <Text color="gray.400">Terms of Use</Text>
       </HStack>
       <Flex width="100%" justifyContent="center" wrap="wrap">
-        <Text width="50%" textAlign="center" color="gray.600" fontSize="sm">
-          <Text>Author:Saurav Behera</Text>
-          <Text>
+        <div width="50%" textAlign="center" color="gray.600" fontSize="sm">
+          <p>Author:Saurav Behera</p>
+          <p>
             <a href="https://workmailsaurav@gmail.com">workmailsaurav@gmail.com</a>
-          </Text>
-        </Text>
+          </p>
+        </div>
       </Flex>
     </Flex>
     

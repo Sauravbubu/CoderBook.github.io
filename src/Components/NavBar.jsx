@@ -69,9 +69,11 @@ const NavBar = () => {
             <Box
               display="flex"
               gap="1rem"
-              w="100%"
+              w="100vw"
               h="50px"
               justifyContent="center"
+              pl="1rem"
+              pr="1rem"
               alignItems={"center"}
             >
 
@@ -84,7 +86,7 @@ const NavBar = () => {
                 alignItems="center"
                 w="100%"
                 justifyItems="center"
-                textAlign={"center"}
+                // textAlign={"center"}
                 flexDir={"column"}
               >
                 <Link to="/bookmarked">

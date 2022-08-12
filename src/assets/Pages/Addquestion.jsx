@@ -50,6 +50,7 @@ const Addquestion = () => {
   const handleSubmit = async () => {
     console.log(collectionn);
     const userId = doc(db, user.email, `${collectionn}`);
+    // console.log(userId);
     console.log(level, collectionadd, collectionn, url, title, solution, Notes);
 
     if (user?.email) {
