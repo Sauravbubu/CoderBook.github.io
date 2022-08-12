@@ -12,6 +12,7 @@ import {
   Input,
   Button,
   Textarea,
+  Text,
 } from "@chakra-ui/react";
 import NavBar from "../../Components/NavBar";
 import { AuthContext } from "../../Context/AuthContext";
@@ -31,8 +32,10 @@ const Addquestion = () => {
   const [solution, setsolution] = useState("");
   const [Notes, setNotes] = useState("");
   const [collectionList, setcollectionList] = useState([]);
-
+const [isbutton, setisbutton] = useState(false);
   useEffect(() => {
+
+    
     const arr = [];
     async function getDocss() {
       const querySnapshot = await getDocs(collection(db, user.email));
@@ -46,8 +49,11 @@ const Addquestion = () => {
     getDocss();
     // console.log(coll)
   }, [coll]);
-//  console.log(collectionList)
+  //  console.log(collectionList)
   const handleSubmit = async () => {
+    if(level &&  collectionadd && collectionn && url && title && solution && Notes){
+     
+    
     console.log(collectionn);
     const userId = doc(db, user.email, `${collectionn}`);
     // console.log(userId);
@@ -64,9 +70,15 @@ const Addquestion = () => {
           url: url,
         }),
       });
+      
     } else {
       alert("Login To Bookmark");
     }
+
+
+  }else{
+    alert("Please Fill all the fields")
+  }
   };
 
   return (
@@ -81,7 +93,6 @@ const Addquestion = () => {
           templateColumns="repeat(2, 1fr)"
           boxShadow={
             "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-
           }
           borderRadius="lg"
           display={"grid"}
@@ -90,7 +101,8 @@ const Addquestion = () => {
           <GridItem>
             <FormControl>
               <FormLabel> Level</FormLabel>
-              <Select textTransform="uppercase" 
+              <Select
+                textTransform="uppercase"
                 onChange={(e) => setlevel(e.target.value)}
                 placeholder="Select level..."
               >
@@ -102,13 +114,14 @@ const Addquestion = () => {
           </GridItem>
           <GridItem>
             <FormControl>
-              <FormLabel> Collection</FormLabel>
-              <Select textTransform="uppercase" 
+              <FormLabel>Choose Collection</FormLabel>
+              <Select
+                textTransform="uppercase"
                 onChange={(e) => setcollection(e.target.value)}
                 placeholder="Select collection"
               >
                 {collectionList?.map((el, i) => (
-                  <option  key={i} value={el}>
+                  <option key={i} value={el}>
                     {el}
                   </option>
                 ))}
@@ -156,10 +169,14 @@ const Addquestion = () => {
               />
             </FormControl>
           </GridItem>
-          <Button bg="teal.600" w="30%" color="white" onClick={handleSubmit}>Submit</Button>
+          <Box>
+         { isbutton ?<Text color="orange.600" >* Fill All fields to Submit</Text>:""}
+          <Button disabled={isbutton} bg="teal.600" w="30%" color="white" onClick={handleSubmit}>
+            Submit
+          </Button>
+          </Box>
         </Grid>
       </Grid>
-      
     </Box>
   );
 };
