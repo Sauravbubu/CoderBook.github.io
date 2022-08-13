@@ -56,7 +56,7 @@ const Account = () => {
     <>
       <NavBar/>
       <Text textAlign={"center"} fontSize={"4xl"}>
-        BookMarked Questions
+       All BookMarked Questions
       </Text>
 
       <Flex flexDir="column" align={"center"}>

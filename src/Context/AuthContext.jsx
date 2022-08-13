@@ -34,7 +34,7 @@ export default function AuthContextProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 
-      console.log(topic)
+      // console.log(topic)
       setuser(currentUser);
       axios
         .get("https://mini-db.herokuapp.com/api/users")
@@ -64,7 +64,7 @@ export default function AuthContextProvider({ children }) {
           }
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
       // console.log("Cuser",currentUser.email);
 
@@ -74,7 +74,7 @@ export default function AuthContextProvider({ children }) {
         })
         .then((res) => {})
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     });
    

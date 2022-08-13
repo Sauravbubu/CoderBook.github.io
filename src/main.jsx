@@ -10,7 +10,7 @@ import SearchContextProvider from './Context/SeachContex'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
   
-  <ChakraProvider>
+  <ChakraProvider >
   <BrowserRouter>
   <AuthContextProvider>
   <SearchContextProvider>

@@ -8,11 +8,11 @@ import Acordion from "./Acordion";
 
 
 const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
-    console.log(problem, URL, level,notes,solution);
+    // console.log(problem, URL, level,notes,solution);
   const [done, setdone] = useState(false);
   const [bookmark, setbookmark] = useState(false);
   const { user,topic,Owndata,setOwndata,coll,setcoll } = useContext(AuthContext);
-console.log(Owndata);
+// console.log(Owndata);
   const userId = doc(db, "user", `${user?.email}`);
   //  console.log(user?.email,"Qcard")
   const handleBookmark = async (problem) => {
@@ -41,7 +41,7 @@ console.log(Owndata);
   const deleteBookmark = async (problem) => {
     try {
       const results = Owndata.filter((item) => item.title !== problem);
-      console.log(results)
+      // console.log(results)
       await updateDoc(bookmarkRef, { questions: results });
       setcoll(!coll)
     } catch (error) {
@@ -72,7 +72,7 @@ console.log(Owndata);
             color="whitesmoke"
             p="0.31em"
             pr="-30px"
-            href={`https://${URL}`}
+            href={URL}
             isExternal
           >
             Solve Now <ExternalLinkIcon mx="2px" />
@@ -89,7 +89,7 @@ console.log(Owndata);
             color="whitesmoke"
             p="0.2em"
             fontSize={["sm", "xs", "md"]}
-            href={`https://${solution}`}
+            href={solution}
             isExternal
           >
             Link to Solution <ExternalLinkIcon mx="2px" />

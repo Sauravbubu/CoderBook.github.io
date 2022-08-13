@@ -32,10 +32,9 @@ const Addquestion = () => {
   const [solution, setsolution] = useState("");
   const [Notes, setNotes] = useState("");
   const [collectionList, setcollectionList] = useState([]);
-const [isbutton, setisbutton] = useState(false);
+  const [isbutton, setisbutton] = useState(true);
+const [added, setadded] = useState(false);
   useEffect(() => {
-
-    
     const arr = [];
     async function getDocss() {
       const querySnapshot = await getDocs(collection(db, user.email));
@@ -51,13 +50,10 @@ const [isbutton, setisbutton] = useState(false);
   }, [coll]);
   //  console.log(collectionList)
   const handleSubmit = async () => {
-    if(level &&  collectionadd && collectionn && url && title && solution && Notes){
-     
-    
-    console.log(collectionn);
+    // console.log(collectionn);
     const userId = doc(db, user.email, `${collectionn}`);
     // console.log(userId);
-    console.log(level, collectionadd, collectionn, url, title, solution, Notes);
+    // console.log(level, collectionadd, collectionn, url, title, solution, Notes);
 
     if (user?.email) {
       // setbookmark(!bookmark);
@@ -70,15 +66,10 @@ const [isbutton, setisbutton] = useState(false);
           url: url,
         }),
       });
-      
+      setadded(true)
     } else {
       alert("Login To Bookmark");
     }
-
-
-  }else{
-    alert("Please Fill all the fields")
-  }
   };
 
   return (
@@ -154,7 +145,7 @@ const [isbutton, setisbutton] = useState(false);
               <Input
                 onChange={(e) => setsolution(e.target.value)}
                 type="text"
-                placeholder="Enter any youtube/geeksforgeeks or stackoverflow link"
+                placeholder="Any youtube or stackoverflow link / same question link"
               />
             </FormControl>
           </GridItem>
@@ -163,17 +154,38 @@ const [isbutton, setisbutton] = useState(false);
             <FormControl>
               <FormLabel>Any notes</FormLabel>
               <Textarea
-                onChange={(e) => setNotes(e.target.value)}
-                type=""
-                placeholder="Any Notes want to add ( optional )"
+                onChange={(e) => {
+                  if (Notes.length > 3) {
+                    setisbutton(false);
+                  } else {
+                    setisbutton(true);
+                  }
+                  setNotes(e.target.value);
+                }}
+               
+                type="text"
+                placeholder="Any Notes want to add (minimum 5 letters) 
+                ( if you paste here Then press Enter )
+                "
               />
             </FormControl>
           </GridItem>
           <Box>
-         { isbutton ?<Text color="orange.600" >* Fill All fields to Submit</Text>:""}
-          <Button disabled={isbutton} bg="teal.600" w="30%" color="white" onClick={handleSubmit}>
-            Submit
-          </Button>
+            {isbutton ? (
+              <Text color="orange.600">* Fill All fields to Submit</Text>
+            ) : (
+              ""
+            )}
+            <Button
+              disabled={isbutton}
+              bg="teal.600"
+              w="30%"
+              color="white"
+              onClick={handleSubmit}
+            >
+            {added?"Added":"Submit" }
+              
+            </Button>
           </Box>
         </Grid>
       </Grid>

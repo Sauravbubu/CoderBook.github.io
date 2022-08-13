@@ -38,7 +38,7 @@ const Completed = () => {
       setfdata(doc.data()?.completed);
     });
   }, [user?.email]);
-  console.log(fdata);
+  // console.log(fdata);
 
   const bookmarkRef = doc(db, "user", `${user?.email}`);
   const deleteBookmark = async (problem) => {
@@ -56,7 +56,7 @@ const Completed = () => {
     <>
       <NavBar/>
       <Text textAlign={"center"} fontSize={"4xl"}>
-        Copleted Questions
+       All Completed Questions
       </Text>
 
       <Flex flexDir="column" align={"center"}>

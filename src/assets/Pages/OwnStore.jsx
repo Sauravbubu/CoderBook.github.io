@@ -19,7 +19,7 @@ const OwnStore = () => {
   const [List, setList] = useState([]);
   let data = [];
   useEffect(() => {
-    console.log(topic);
+    // console.log(topic);
 
     async function getDocss() {
       // const equipment =  collection(db, user.email,topic);
@@ -30,7 +30,7 @@ const OwnStore = () => {
          
         // console.log("Document data:", docSnap.data().questions);
 
-        console.log(data, "data");
+        // console.log(data, "data");
         setList([...data])
         setOwndata([...data])
       } else {
@@ -43,7 +43,7 @@ const OwnStore = () => {
     getDocss();
   }, [user.email,coll]);
 
-  console.log(List);
+  // console.log(List);
   return (
     <>
     
