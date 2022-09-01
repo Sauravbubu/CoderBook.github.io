@@ -15,6 +15,7 @@ export const AuthContext = createContext();
 
 //DSA
 export default function AuthContextProvider({ children }) {
+  
   const navigate = useNavigate();
   const [coll, setcoll] = useState(false);
   const [topic, settopic] = useState("");
@@ -84,7 +85,7 @@ export default function AuthContextProvider({ children }) {
   }, [topic]);
 
   useEffect(() => {}, [data]);
-  // console.log("user",user);
+  console.log("user",user);
 
   return (
     <AuthContext.Provider

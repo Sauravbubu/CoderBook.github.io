@@ -21,6 +21,8 @@ import SearchInput from "../../Components/SearchInput";
 import { Link } from "react-router-dom";
 
 import NavBar from "../../Components/NavBar";
+import LandingPage from "../../Components/LandingPage";
+import FrontendPart from "../../Components/FrontendPart";
 const Home = () => {
   const { user, Logout } = useContext(AuthContext);
   const { setsearchdata, searchdata } = useContext(SearchContext);
@@ -37,9 +39,12 @@ const Home = () => {
       justifyContent="center"
     >
       {/* <Banner/> */}
+      {/* <NavBar /> */}
+<LandingPage/>
 
-      <NavBar />
-      <TabPannel />
+
+{/* <FrontendPart/> */}
+      {/* <TabPannel /> */}
     </Box>
   );
 };

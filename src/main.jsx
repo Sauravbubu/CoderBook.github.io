@@ -6,7 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import AuthContextProvider from './Context/AuthContext'
 import { BrowserRouter } from 'react-router-dom'
 import SearchContextProvider from './Context/SeachContex'
-
+import "./index.css"
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
   

@@ -47,7 +47,7 @@ const OwnStore = () => {
   return (
     <>
     
-      <NavBar />
+      {/* <NavBar /> */}
       <Box
         display="flex"
         flexDir={"column"}

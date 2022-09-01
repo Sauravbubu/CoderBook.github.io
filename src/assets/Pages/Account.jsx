@@ -54,7 +54,7 @@ const Account = () => {
 
   return (
     <>
-      <NavBar/>
+      {/* <NavBar/> */}
       <Text textAlign={"center"} fontSize={"4xl"}>
        All BookMarked Questions
       </Text>

@@ -57,7 +57,7 @@ setTimeout(() => {
       <Button
         ref={btnRef}
         colorScheme="teal"
-        size={["sm", "sm", "md"]}
+        size={["xs", "sm", "md"]}
         onClick={handleclick}
         isLoading={loadingState}
       >

@@ -74,7 +74,7 @@ const [added, setadded] = useState(false);
 
   return (
     <Box w="100%">
-      <NavBar />
+      {/* <NavBar /> */}
       <Grid w="100%" gridTemplateColumns="repeat(2, 1fr)" p="2rem">
         <Addcollection />
         <Grid

@@ -54,7 +54,7 @@ const Completed = () => {
 
   return (
     <>
-      <NavBar/>
+      {/* <NavBar/> */}
       <Text textAlign={"center"} fontSize={"4xl"}>
        All Completed Questions
       </Text>

@@ -3,6 +3,7 @@ import { ThemeProvider } from "@emotion/react";
 import { useState } from "react";
 import AllRoutes from "./assets/Pages/Allroutes/AllRoutes";
 import { Footer } from "./Components/footer";
+import NavBar from "./Components/NavBar";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,6 +13,7 @@ function App() {
       <ColorModeProvider>
         <CSSReset />
         <div style={{fontFamily: 'Heebo' ,"fontDisplay": "swap"}}>
+        <NavBar/>
           <AllRoutes />
           <Footer />
         </div>
