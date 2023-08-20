@@ -1,12 +1,13 @@
 import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
+import { baseurl } from "../constant";
 
 const FrontendPart = () => {
   const [javascriptlist, setjavascriptlist] = useState([]);
   function getjs() {
     axios
-      .get("https://mini-db.herokuapp.com/api/javascript")
+      .get(`${baseurl}javascript`)
       .then((questions) => {
         setjavascriptlist(questions.data);
       });
@@ -125,13 +126,25 @@ const FrontendPart = () => {
                         allowfullscreen
                       ></iframe>
                     </Box>
-                    <Box width="100%" p="2rem" display={"flex"} justifyContent="center">
+                    <Box
+                      width="100%"
+                      p="2rem"
+                      display={"flex"}
+                      justifyContent="center"
+                    >
                       <a
                         href="https://jsfiddle.net/coderbook/x4q79mvd/"
                         target="_blank"
                         width="100%"
                         height="500"
-                        style={{margin:"auto",backgroundColor:"tomato" ,borderRadius:"10px",paddingLeft:"1rem",paddingRight:"1rem",color:"white"}}
+                        style={{
+                          margin: "auto",
+                          backgroundColor: "tomato",
+                          borderRadius: "10px",
+                          paddingLeft: "1rem",
+                          paddingRight: "1rem",
+                          color: "white",
+                        }}
                       >
                         Solve Now
                       </a>

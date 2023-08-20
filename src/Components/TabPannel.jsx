@@ -19,37 +19,42 @@ import {
 import axios from "axios";
 import Qcard from "./Qcard";
 import Skeletonn from "./Skeleton";
+import { baseurl } from "../constant";
 const TabPannel = () => {
   const colors = ["pink.100", "teal.100", "blue.100", "purple.100", "#353935"];
   const [data, setdata] = useState([]);
- const [skel, setskel]=useState(true);
+  const [skel, setskel] = useState(true);
   const [tabIndex, setTabIndex] = React.useState(0);
   const bg = colors[tabIndex];
   useEffect(() => {
-    axios.get("https://mini-db.herokuapp.com/api/questions").then((res) => {
-      const arr = res.data;
-      setdata(arr);
-      setskel(!skel)
-    });
+    axios
+      .get(`${baseurl}questions`)
+      .then((res) => {
+        const arr = res.data;
+        setdata(arr);
+        setskel(!skel);
+      });
   }, []);
 
   return (
     <>
-    { skel &&
-   <Skeletonn/>
- }
+      {skel && <Skeletonn />}
       <Flex>
-      <Tabs>
-        <TabList bg="purple.600"  color="white" w="100vw" >
-          {data?.map((el, i) => (
-            <Tab gap="-1rem" key={i} overflow="hidden" fontSize={["xs","xs","sm"]} >
-              
-              {el.topic}
-            </Tab>
-          ))}
-        </TabList>
+        <Tabs>
+          <TabList bg="purple.600" color="white" w="100vw">
+            {data?.map((el, i) => (
+              <Tab
+                gap="-1rem"
+                key={i}
+                overflow="hidden"
+                fontSize={["xs", "xs", "sm"]}
+              >
+                {el.topic}
+              </Tab>
+            ))}
+          </TabList>
 
-        <TabPanels p="1em">
+          <TabPanels p="1em">
             {data?.map((el, i) => (
               <TabPanel key={i}>
                 <Flex
@@ -82,4 +87,3 @@ const TabPannel = () => {
 };
 
 export default TabPannel;
-

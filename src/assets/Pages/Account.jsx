@@ -21,13 +21,14 @@ import { DeleteIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import SearchInput from "../../Components/SearchInput";
 import PopHover from "../../Components/Popover";
 import NavBar from "../../Components/NavBar";
+import { baseurl } from "../../constant";
 
 const Account = () => {
   const { user } = useContext(AuthContext);
   const [fdata, setfdata] = useState([]);
   const [mdata, setmdata] = useState([]);
   useEffect(() => {
-    axios.get("https://mini-db.herokuapp.com/api/questions?").then((res) => {
+    axios.get(`${baseurl}questions?`).then((res) => {
       // res.data.filter((qn)=>qn.questions)
       // console.log(res.data)
 
@@ -56,7 +57,7 @@ const Account = () => {
     <>
       {/* <NavBar/> */}
       <Text textAlign={"center"} fontSize={"4xl"}>
-       All BookMarked Questions
+        All BookMarked Questions
       </Text>
 
       <Flex flexDir="column" align={"center"}>
@@ -92,11 +93,16 @@ const Account = () => {
                 </Link>
               </Box>
             </Flex>
-            <Tooltip   placement='left' ml="2rem" label='Delete' stylefontSize='md' aria-label='Theme'>
-
-            <Button onClick={() => deleteBookmark(el.problem)}>
-              <DeleteIcon />
-            </Button>
+            <Tooltip
+              placement="left"
+              ml="2rem"
+              label="Delete"
+              stylefontSize="md"
+              aria-label="Theme"
+            >
+              <Button onClick={() => deleteBookmark(el.problem)}>
+                <DeleteIcon />
+              </Button>
             </Tooltip>
           </Flex>
         ))}

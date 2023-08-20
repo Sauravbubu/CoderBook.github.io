@@ -17,40 +17,40 @@ import {
 } from "@chakra-ui/react";
 import Qcard from "./Qcard";
 import axios from "axios";
-
+import { baseurl } from "../constant";
 
 export function ResultDrawer({ text }) {
   const { setsearchdata, searchdata } = useContext(SearchContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const [data, setdata] = useState([]);
-  const [loadingState, setloadingState] = useState(false)
+  const [loadingState, setloadingState] = useState(false);
   function handleclick() {
     const arr = [];
-setloadingState(true);
+    setloadingState(true);
     data.map((e, i) =>
       e.questions.map((el) => {
         if (el.Problem.toLowerCase().includes(text.toLowerCase())) {
-          
           arr.push(el);
         }
       })
     );
     setsearchdata(arr);
-    
-setTimeout(() => {
-  setloadingState(false)
-}, 0);
-   
+
+    setTimeout(() => {
+      setloadingState(false);
+    }, 0);
+
     onOpen();
   }
 
   useEffect(() => {
-    axios.get('https://mini-db.herokuapp.com/api/questions').then((res)=>{
-      const arr=res.data
-      setdata(arr)
-    })
-    
+    axios
+      .get(`${baseurl}questions`)
+      .then((res) => {
+        const arr = res.data;
+        setdata(arr);
+      });
   }, []);
   return (
     <>
@@ -92,11 +92,15 @@ setTimeout(() => {
                 ))}{" "}
               </>
             ) : (
-              
-              <Text mt="6rem" textAlign={"center"} color="red.300" m="3rem" fontSize={"5xl"}>
-              ☹ <br/>No Match
-                
-                Write correct keyword 
+              <Text
+                mt="6rem"
+                textAlign={"center"}
+                color="red.300"
+                m="3rem"
+                fontSize={"5xl"}
+              >
+                ☹ <br />
+                No Match Write correct keyword
               </Text>
             )}
           </DrawerBody>

@@ -9,13 +9,13 @@ import { auth, db } from "../FireBase";
 import { useNavigate } from "react-router-dom";
 import { setDoc, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import axios from "axios";
-import { Tooltip } from '@chakra-ui/react'
+import { Tooltip } from "@chakra-ui/react";
+import { baseurl } from "../constant";
 
 export const AuthContext = createContext();
 
 //DSA
 export default function AuthContextProvider({ children }) {
-  
   const navigate = useNavigate();
   const [coll, setcoll] = useState(false);
   const [topic, settopic] = useState("");
@@ -34,11 +34,10 @@ export default function AuthContextProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-
       // console.log(topic)
       setuser(currentUser);
       axios
-        .get("https://mini-db.herokuapp.com/api/users")
+        .get(`${baseurl}users`)
         .then((res) => {
           // console.log(res.data)
           setdata(res.data);
@@ -51,15 +50,15 @@ export default function AuthContextProvider({ children }) {
           }
 
           if (flag === false) {
-            setDoc(doc(db,currentUser.email,"list(Preset)"), {
+            setDoc(doc(db, currentUser.email, "list(Preset)"), {
               //dynamicaly will be created on add collection
-              e: []
+              e: [],
             });
-            setDoc(doc(db,"user",currentUser.email),{
-                bookmarked:[],
-                completed:[],
-                ownquestions:[],
-            })
+            setDoc(doc(db, "user", currentUser.email), {
+              bookmarked: [],
+              completed: [],
+              ownquestions: [],
+            });
 
             // console.log(flag);
           }
@@ -70,7 +69,7 @@ export default function AuthContextProvider({ children }) {
       // console.log("Cuser",currentUser.email);
 
       axios
-        .post("https://mini-db.herokuapp.com/api/users", {
+        .post(`${baseurl}users`, {
           id: currentUser.email,
         })
         .then((res) => {})
@@ -78,18 +77,28 @@ export default function AuthContextProvider({ children }) {
           // console.log(error);
         });
     });
-   
+
     return () => {
       unsubscribe();
     };
   }, [topic]);
 
   useEffect(() => {}, [data]);
-  console.log("user",user);
+  console.log("user", user);
 
   return (
     <AuthContext.Provider
-      value={{ user, handleLogin,Owndata,setOwndata ,Logout, setcoll, coll, topic, settopic }}
+      value={{
+        user,
+        handleLogin,
+        Owndata,
+        setOwndata,
+        Logout,
+        setcoll,
+        coll,
+        topic,
+        settopic,
+      }}
     >
       {children}
     </AuthContext.Provider>

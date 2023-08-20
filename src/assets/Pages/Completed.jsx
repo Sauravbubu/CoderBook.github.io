@@ -21,18 +21,21 @@ import { DeleteIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import SearchInput from "../../Components/SearchInput";
 import PopHover from "../../Components/Popover";
 import NavBar from "../../Components/NavBar";
+import { baseurl } from "../../constant";
 
 const Completed = () => {
   const { user } = useContext(AuthContext);
   const [fdata, setfdata] = useState([]);
   const [mdata, setmdata] = useState([]);
   useEffect(() => {
-    axios.get("https://mini-db.herokuapp.com/api/questions?").then((res) => {
-      // res.data.filter((qn)=>qn.questions)
-      // console.log(res.data)
+    axios
+      .get(`${baseurl}questions?`)
+      .then((res) => {
+        // res.data.filter((qn)=>qn.questions)
+        // console.log(res.data)
 
-      setmdata(res.data);
-    });
+        setmdata(res.data);
+      });
 
     onSnapshot(doc(db, "user", `${user?.email}`), (doc) => {
       setfdata(doc.data()?.completed);
@@ -56,7 +59,7 @@ const Completed = () => {
     <>
       {/* <NavBar/> */}
       <Text textAlign={"center"} fontSize={"4xl"}>
-       All Completed Questions
+        All Completed Questions
       </Text>
 
       <Flex flexDir="column" align={"center"}>
@@ -92,11 +95,16 @@ const Completed = () => {
                 </Link>
               </Box>
             </Flex>
-            <Tooltip  placement='left' ml="2rem" label='Delete' stylefontSize='md' aria-label='Theme'>
-
-            <Button onClick={() => deleteBookmark(el.problem)}>
-              <DeleteIcon />
-            </Button>
+            <Tooltip
+              placement="left"
+              ml="2rem"
+              label="Delete"
+              stylefontSize="md"
+              aria-label="Theme"
+            >
+              <Button onClick={() => deleteBookmark(el.problem)}>
+                <DeleteIcon />
+              </Button>
             </Tooltip>
           </Flex>
         ))}
