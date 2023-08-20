@@ -1,35 +1,72 @@
-// import { TabPanel } from '@chakra-ui/react'
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import FrontendPart from "../../../Components/FrontendPart";
-import TabPannel from "../../../Components/TabPannel";
-import Account from "../Account";
-import Addquestion from "../Addquestion";
-import Completed from "../Completed";
-import Home from "../Home";
-import OwnStore from "../OwnStore";
 import PrivateRoute from "./PrivateRoute";
+import { Skeleton } from "@chakra-ui/react/dist/chakra-ui-react.cjs";
+
+const FrontendPart = lazy(() => import("../../../Components/FrontendPart"));
+const TabPannel = lazy(() => import("../../../Components/TabPannel"));
+const Account = lazy(() => import("../Account"));
+const Addquestion = lazy(() => import("../Addquestion"));
+const Completed = lazy(() => import("../Completed"));
+const Home = lazy(() => import("../Home"));
+const OwnStore = lazy(() => import("../OwnStore"));
 
 const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-
+      {/* ... */}
       <Route
         path="/frontend"
         element={
           <PrivateRoute>
-            <FrontendPart />
+            <Suspense fallback={<Skeleton />}>
+              <FrontendPart />
+            </Suspense>
           </PrivateRoute>
         }
       />
-      <Route path="/dsa" element={<TabPannel />} />
-
-      {/* <Route path="/home"     element={<Home/>} /> */}
-      <Route path="/bookmarked" element={<Account />} />
-      <Route path="/addquestion" element={<Addquestion />} />
-      <Route path="/ownstore" element={<OwnStore />} />
-      <Route path="/completed" element={<Completed />} />
+      <Route
+        path="/dsa"
+        element={
+          <Suspense fallback={<Skeleton />}>
+            <TabPannel />
+          </Suspense>
+        }
+      />
+      {/* ... */}
+      <Route
+        path="/bookmarked"
+        element={
+          <Suspense fallback={<Skeleton />}>
+            <Account />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/addquestion"
+        element={
+          <Suspense fallback={<Skeleton />}>
+            <Addquestion />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/ownstore"
+        element={
+          <Suspense fallback={<Skeleton />}>
+            <OwnStore />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/completed"
+        element={
+          <Suspense fallback={<Skeleton />}>
+            <Completed />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };
