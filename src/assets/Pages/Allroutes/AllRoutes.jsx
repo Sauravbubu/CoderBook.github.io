@@ -22,7 +22,7 @@ const AllRoutes = () => {
         element={
           <PrivateRoute>
             <Suspense fallback={<Skeleton />}>
-              <FrontendPart />
+              <FrontendPart type="javascript"/>
             </Suspense>
           </PrivateRoute>
         }
