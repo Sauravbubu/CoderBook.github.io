@@ -1,63 +1,71 @@
 import { Button, Flex, FormLabel, Input } from "@chakra-ui/react";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc, deleteDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { db } from "../FireBase";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
-const Addcollection = () => {
+
+const Addcollection = ({ updateCollectionList }) => {
   const { user } = useContext(AuthContext);
-  const { setcoll, coll, settopic } = useContext(AuthContext);
-  const [collectionadd, setcollectionadd] = useState("");
-  const [collectionList, setcollectionList] = useState([]);
-  const addCollection = () => {
-    // console.log(collectionadd)
-    setDoc(doc(db, user.email, collectionadd), {
+  const [collectionadd, setCollectionadd] = useState("");
+  const [collectionList, setCollectionList] = useState([]);
+
+  const addCollection = async () => {
+    await setDoc(doc(db, user.email, collectionadd), {
       questions: [],
     });
-    setcoll(!coll);
+    updateCollectionList();
+  };
+
+  const deleteCollection = async (collectionName) => {
+    await deleteDoc(doc(db, user.email, collectionName));
+    updateCollectionList();
   };
 
   useEffect(() => {
-    const arr = [];
-    async function getDocss() {
+    async function getCollectionNames() {
       const querySnapshot = await getDocs(collection(db, user.email));
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data());
-        arr.push(doc.id);
-      });
-      setcollectionList(arr);
+      const collectionNames = querySnapshot.docs.map((doc) => doc.id);
+      setCollectionList(collectionNames);
     }
-    getDocss();
-    // console.log(coll)
-  }, [coll]);
-  //  console.log(collectionList)
+    getCollectionNames();
+  }, [user.email]);
+
   return (
     <Flex gap="1rem" w="20vw" flexDir={"column"}>
       <FormLabel textAlign={"center"}>Add a collection Name</FormLabel>
       <Input
-        onChange={(e) => setcollectionadd(e.target.value)}
+        onChange={(e) => setCollectionadd(e.target.value)}
         type="text"
         placeholder="Enter a Collection Name"
-      ></Input>
+      />
       <Button bg="blue.200" onClick={addCollection}>
         Add
       </Button>
 
       {collectionList?.map((el, i) => (
-        <Link key={i} to="/ownstore">
+        <Flex key={i} align="center" justify="space-between">
+          <Link to="/ownstore">
+            <Button
+              size={["sm", "sm", "md"]}
+              textTransform="uppercase"
+              w="100%"
+              bg="orange.200"
+              onClick={() => {
+                settopic(el);
+              }}
+            >
+              {el}
+            </Button>{" "}
+          </Link>
           <Button
-            size={["sm", "sm", "md"]}
-            textTransform="uppercase"
-            w="100%"
-            bg="orange.200"
-            onClick={() => {
-              settopic(el);
-            }}
+            size="sm"
+            bg="red.500"
+            onClick={() => deleteCollection(el)}
           >
-            {el}
-          </Button>{" "}
-        </Link>
+            Delete
+          </Button>
+        </Flex>
       ))}
     </Flex>
   );
