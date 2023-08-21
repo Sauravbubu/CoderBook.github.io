@@ -11,7 +11,7 @@ import {
   useColorMode,
   Switch,
 } from "@chakra-ui/react";
-import TabPannel from "../../Components/TabPannel";
+import TabPannel from "./TabPannel";
 import { Login } from "../../Components/LoginPopUp";
 import { SearchContext } from "../../Context/SeachContex";
 // import { ResultDrawer } from "../../Components/SearchModal";
@@ -29,21 +29,19 @@ const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Box 
+    <Box
       bgColor="#28282B0"
-     
-      
-      backdropFilter="auto" backdropBlur="6px"
+      backdropFilter="auto"
+      backdropBlur="6px"
       w="100%"
       alignItems="center"
       justifyContent="center"
     >
       {/* <Banner/> */}
       {/* <NavBar /> */}
-<LandingPage/>
+      <LandingPage />
 
-
-{/* <FrontendPart/> */}
+      {/* <FrontendPart/> */}
       {/* <TabPannel /> */}
     </Box>
   );

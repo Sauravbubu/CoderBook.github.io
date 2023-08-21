@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Skeleton,
-  SkeletonCircle,
-  SkeletonText,
-  Stack,
-} from "@chakra-ui/react";
-import {
   Tabs,
   TabList,
   Box,
@@ -17,9 +11,9 @@ import {
 } from "@chakra-ui/react";
 
 import axios from "axios";
-import Qcard from "./Qcard";
-import Skeletonn from "./Skeleton";
-import { baseurl } from "../constant";
+import Qcard from "../../Components/Qcard";
+import Skeletonn from "../../Components/Skeleton";
+import { baseurl } from "../../constant";
 
 const TabPannel = () => {
   const [data, setdata] = useState([]);
@@ -42,11 +36,7 @@ const TabPannel = () => {
         <Tabs>
           <TabList bg="purple.600" color="white" w="100vw">
             {data?.map((el, i) => (
-              <Tab
-                key={i}
-                overflow="hidden"
-                fontSize={["xs", "xs", "sm"]}
-              >
+              <Tab key={i} overflow="hidden" fontSize={["xs", "xs", "sm"]}>
                 {el.topic}
               </Tab>
             ))}

@@ -10,7 +10,7 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
-import { baseurl } from "../constant";
+import { baseurl } from "../../constant";
 import axios from "axios";
 
 const ProjectCategory = ({ title, projects }) => (

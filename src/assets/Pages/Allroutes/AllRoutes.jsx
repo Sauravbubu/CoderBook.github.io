@@ -2,15 +2,15 @@ import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import { Skeleton } from "@chakra-ui/react/dist/chakra-ui-react.cjs";
-import ProjectsPage from "../../../Components/machineCoding";
 
 const FrontendPart = lazy(() => import("../../../Components/FrontendPart"));
-const TabPannel = lazy(() => import("../../../Components/TabPannel"));
+const TabPannel = lazy(() => import("../TabPannel"));
 const Account = lazy(() => import("../Account"));
 const Addquestion = lazy(() => import("../Addquestion"));
 const Completed = lazy(() => import("../Completed"));
 const Home = lazy(() => import("../Home"));
 const OwnStore = lazy(() => import("../OwnStore"));
+const ProjectsPage = lazy(() => import("../machineCoding"));
 
 const AllRoutes = () => {
   return (
