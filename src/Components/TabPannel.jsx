@@ -20,31 +20,29 @@ import axios from "axios";
 import Qcard from "./Qcard";
 import Skeletonn from "./Skeleton";
 import { baseurl } from "../constant";
+
 const TabPannel = () => {
-  const colors = ["pink.100", "teal.100", "blue.100", "purple.100", "#353935"];
   const [data, setdata] = useState([]);
-  const [skel, setskel] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [tabIndex, setTabIndex] = React.useState(0);
-  const bg = colors[tabIndex];
+
   useEffect(() => {
-    axios
-      .get(`${baseurl}questions`)
-      .then((res) => {
-        const arr = res.data;
-        setdata(arr);
-        setskel(!skel);
-      });
+    axios.get(`${baseurl}questions`).then((res) => {
+      const arr = res.data;
+      setdata(arr);
+      setIsLoading(false);
+    });
   }, []);
 
   return (
     <>
-      {skel && <Skeletonn />}
-      <Flex>
+      {isLoading ? ( // Only render Skeletonn when loading
+        <Skeletonn isLoading={isLoading} />
+      ) : (
         <Tabs>
           <TabList bg="purple.600" color="white" w="100vw">
             {data?.map((el, i) => (
               <Tab
-                gap="-1rem"
                 key={i}
                 overflow="hidden"
                 fontSize={["xs", "xs", "sm"]}
@@ -59,12 +57,17 @@ const TabPannel = () => {
               <TabPanel key={i}>
                 <Flex
                   direction="column"
-                  width={["400px", "600px", "800px", "1300px"]}
+                  width="100%"
                   alignItems="center"
                   justifyContent="space-between"
+                  p={[2, 4]} // Responsive padding
                 >
-                  <Text fontFamily={"monospace"} fontSize="2xl" color="primary">
-                    {" "}
+                  <Text
+                    fontFamily="monospace"
+                    fontSize={["xl", "2xl"]}
+                    color="purple.600" // Use consistent color
+                    mb={2} // Add margin bottom for spacing
+                  >
                     {el.topic}
                   </Text>
                   {el.questions.map((qn, i) => (
@@ -81,7 +84,7 @@ const TabPannel = () => {
             ))}
           </TabPanels>
         </Tabs>
-      </Flex>
+      )}
     </>
   );
 };

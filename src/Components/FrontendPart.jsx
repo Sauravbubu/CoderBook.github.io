@@ -3,14 +3,12 @@ import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { baseurl } from "../constant";
 
-const FrontendPart = () => {
+const FrontendPart = ({ type }) => {
   const [javascriptlist, setjavascriptlist] = useState([]);
   function getjs() {
-    axios
-      .get(`${baseurl}javascript`)
-      .then((questions) => {
-        setjavascriptlist(questions.data);
-      });
+    axios.get(`${baseurl + type}`).then((questions) => {
+      setjavascriptlist(questions.data);
+    });
   }
   // useMemo(() => getjs(), [count]);
   useEffect(() => {

@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import { Skeleton } from "@chakra-ui/react/dist/chakra-ui-react.cjs";
+import ProjectsPage from "../../../Components/machineCoding";
 
 const FrontendPart = lazy(() => import("../../../Components/FrontendPart"));
 const TabPannel = lazy(() => import("../../../Components/TabPannel"));
@@ -17,11 +18,31 @@ const AllRoutes = () => {
       <Route path="/" element={<Home />} />
       {/* ... */}
       <Route
-        path="/frontend"
+        path="/javascript"
         element={
           <PrivateRoute>
             <Suspense fallback={<Skeleton />}>
               <FrontendPart />
+            </Suspense>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/react"
+        element={
+          <PrivateRoute>
+            <Suspense fallback={<Skeleton />}>
+              <FrontendPart type="react" />
+            </Suspense>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/ui_machine_coding"
+        element={
+          <PrivateRoute>
+            <Suspense fallback={<Skeleton />}>
+              <ProjectsPage />
             </Suspense>
           </PrivateRoute>
         }
