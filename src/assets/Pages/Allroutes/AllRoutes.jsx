@@ -11,7 +11,7 @@ const Completed = lazy(() => import("../Completed"));
 const Home = lazy(() => import("../Home"));
 const OwnStore = lazy(() => import("../OwnStore"));
 const ProjectsPage = lazy(() => import("../machineCoding"));
-
+const QuizComponent = lazy(() => import("../quiz"));
 const AllRoutes = () => {
   return (
     <Routes>
@@ -22,7 +22,7 @@ const AllRoutes = () => {
         element={
           <PrivateRoute>
             <Suspense fallback={<Skeleton />}>
-              <FrontendPart type="javascript"/>
+              <FrontendPart type="javascript" />
             </Suspense>
           </PrivateRoute>
         }
@@ -69,6 +69,14 @@ const AllRoutes = () => {
         element={
           <Suspense fallback={<Skeleton />}>
             <Addquestion />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/jsquiz"
+        element={
+          <Suspense fallback={<Skeleton />}>
+            <QuizComponent />
           </Suspense>
         }
       />

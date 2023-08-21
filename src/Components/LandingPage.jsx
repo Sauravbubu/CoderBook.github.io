@@ -1,13 +1,12 @@
-import React from 'react'
-import CallToActionWithIllustration from './HeroComp'
+import React from "react";
+import CallToActionWithIllustration from "./HeroComp";
 
 const LandingPage = () => {
   return (
-    <div>
+    <>
+      <CallToActionWithIllustration />
+    </>
+  );
+};
 
-        <CallToActionWithIllustration/>
-    </div>
-  )
-}
-
-export default LandingPage
+export default LandingPage;

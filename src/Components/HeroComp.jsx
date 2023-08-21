@@ -49,8 +49,10 @@ export default function CallToActionWithIllustration() {
             w="100%"
             colorScheme={"orange"}
             className="animated-button"
+            transition="transform 0.2s"
+            _hover={{ transform: "scale(1.05)" }}
           >
-            <Link to="/javascript">Javascript Interviews Questions</Link>
+            <Link to="/javascript">Javascript Questions</Link>
           </Button>
           <Button
             rounded={"full"}
@@ -58,8 +60,24 @@ export default function CallToActionWithIllustration() {
             w="100%"
             colorScheme={"orange"}
             className="animated-button"
+            transition="transform 0.2s"
+            _hover={{ transform: "scale(1.05)" }}
           >
-            <Link to="/react">React Interviews Questions</Link>
+            <Link to="/react">React Questions</Link>
+          </Button>
+          <Button
+            rounded={"full"}
+            px={2}
+            w="100%"
+            pl={12}
+            pr={12}
+            color="white"
+            colorScheme={"orange"}
+            className="animated-button"
+            transition="transform 0.2s"
+            _hover={{ transform: "scale(1.05)" }}
+          >
+            <Link to="/ui_machine_coding">Frontend Machine Coding</Link>
           </Button>
           <Button
             rounded={"full"}
@@ -68,9 +86,12 @@ export default function CallToActionWithIllustration() {
             color="white"
             colorScheme={"orange"}
             className="animated-button"
+            transition="transform 0.2s"
+            _hover={{ transform: "scale(1.05)" }}
           >
-            <Link to="ui_machine_coding">Frontend Machine Coding</Link>
+            <Link to="/dsa">DSA Collections</Link>
           </Button>
+          {/* Quiz CTA Button */}
           <Button
             rounded={"full"}
             px={2}
@@ -78,8 +99,10 @@ export default function CallToActionWithIllustration() {
             color="white"
             colorScheme={"orange"}
             className="animated-button"
+            transition="transform 0.2s"
+            _hover={{ transform: "scale(1.05)" }}
           >
-            <Link to="dsa">DSA Collections</Link>
+            <Link to="/jsquiz">Take the Test</Link>
           </Button>
         </Stack>
         <Flex w={"full"}>
