@@ -12,8 +12,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <ColorModeProvider>
         <CSSReset />
-        <div style={{fontFamily: 'Heebo' ,"fontDisplay": "swap"}}>
-        <NavBar/>
+        <div
+          style={{ fontFamily: "Heebo", width: "100vw", fontDisplay: "swap" }}
+        >
+          <NavBar />
           <AllRoutes />
           <Footer />
         </div>
