@@ -5,7 +5,6 @@ import {
   Select,
   Box,
   Grid,
-  GridItem,
   Input,
   Button,
   Textarea,
@@ -36,14 +35,15 @@ const Addquestion = () => {
   const [isAdded, setIsAdded] = useState(false);
 
   const updateCollectionList = async () => {
-    // Fetch the updated collection names here
     const querySnapshot = await getDocs(collection(db, user.email));
     const collectionNames = querySnapshot.docs.map((doc) => doc.id);
     setCollectionList(collectionNames);
   };
+
   useEffect(() => {
-    updateCollectionList();
+    user?.email && updateCollectionList();
   }, [user.email]);
+
   useEffect(() => {
     setIsButtonDisabled(
       !(
@@ -52,10 +52,16 @@ const Addquestion = () => {
         title &&
         url &&
         solution &&
-        notes.length >= 5
+        notes.length >= 5 &&
+        isValidUrl(url)
       )
     );
   }, [collectionName, level, title, url, solution, notes]);
+
+  const isValidUrl = (url) => {
+    const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlPattern.test(url);
+  };
 
   const handleSubmit = async () => {
     if (user?.email) {
@@ -83,7 +89,7 @@ const Addquestion = () => {
         gap="2rem"
         p="2rem"
       >
-        <Addcollection updateCollectionList={updateCollectionList}/>
+        <Addcollection updateCollectionList={updateCollectionList} />
         <Grid
           templateColumns={{ base: "1fr", md: "1fr 1fr" }}
           gap="2rem"
@@ -135,7 +141,13 @@ const Addquestion = () => {
                 onChange={(e) => setUrl(e.target.value)}
                 type="text"
                 placeholder="Paste Question link"
+                isInvalid={url && !isValidUrl(url)}
               />
+              {url && !isValidUrl(url) && (
+                <Text color="red.500" fontSize="sm">
+                  Please enter a valid web link (e.g., http://example.com)
+                </Text>
+              )}
             </FormControl>
           </Box>
 

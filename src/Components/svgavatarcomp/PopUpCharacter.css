@@ -1,0 +1,29 @@
+.pop-up-character {
+    position: fixed;
+    left: -120px;
+    top: 30vh;
+    transform: translateY(-50%);
+    transition: left 0.5s ease-in-out;
+  }
+  
+  .pop-up-character.visible {
+    left: 20px;
+    top: 30vh;
+  }
+  
+  .pop-up-character.hidden {
+    left: -120px;
+  }
+  
+  .character {
+    display: flex;
+    align-items: center;
+  }
+  
+  .text-box {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  

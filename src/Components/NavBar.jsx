@@ -58,11 +58,11 @@ const NavBar = () => {
           <Tooltip label="Change Theme" fontSize="md" aria-label="Theme">
             <Box>
               <Switch
-                size={["sm", "lg"]}
+                size={["sm", "md"]}
                 colorScheme="teal"
                 onChange={toggleColorMode}
               />
-              <Text fontWeight="medium">Theme</Text>
+              <Text fontSize="md">Theme</Text>
             </Box>
           </Tooltip>
 
@@ -84,7 +84,7 @@ const NavBar = () => {
                   fontSize="md"
                   aria-label="Theme"
                 >
-                  <Button size={["sm", "md"]}>Add Questions</Button>
+                  <Button size={["xs", "sm"]}>Add Questions</Button>
                 </Tooltip>
               </Link>
 

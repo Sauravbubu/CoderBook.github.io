@@ -1,12 +1,33 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
+import React, {
+  createContext,
+  useContext,
+  startTransition,
+  useEffect,
+  useState,
+} from "react";
+import { baseurl } from "../constant";
 
+export const SearchContext = createContext();
 
-export const  SearchContext=createContext()
+export default function SearchContextProvider({ children }) {
+  const [apiData, setApiData] = useState([]);
+  const [searchdata, setsearchdata] = useState([]);
 
+  useEffect(() => {
+    // Wrap the axios call with startTransition
+    startTransition(() => {
+      !apiData.length &&
+        axios.get(`${baseurl}questions`).then((res) => {
+          const arr = res.data;
+          setApiData(arr);
+        });
+    });
+  }, []);
 
-export default function SearchContextProvider({children}){
-    
-    const [searchdata, setsearchdata] = useState([]);
-
-    return <SearchContext.Provider value={{searchdata,setsearchdata}}>{children}</SearchContext.Provider>
+  return (
+    <SearchContext.Provider value={{ searchdata, setsearchdata, apiData }}>
+      {children}
+    </SearchContext.Provider>
+  );
 }

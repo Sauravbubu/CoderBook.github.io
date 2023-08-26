@@ -20,15 +20,14 @@ import axios from "axios";
 import { baseurl } from "../constant";
 
 export function ResultDrawer({ text }) {
-  const { setsearchdata, searchdata } = useContext(SearchContext);
+  const { setsearchdata, searchdata, apiData } = useContext(SearchContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const [data, setdata] = useState([]);
   const [loadingState, setloadingState] = useState(false);
   function handleclick() {
     const arr = [];
     setloadingState(true);
-    data.map((e, i) =>
+    apiData?.map((e, i) =>
       e.questions.map((el) => {
         if (el.Problem.toLowerCase().includes(text.toLowerCase())) {
           arr.push(el);
@@ -44,70 +43,77 @@ export function ResultDrawer({ text }) {
     onOpen();
   }
 
-  useEffect(() => {
-    axios
-      .get(`${baseurl}questions`)
-      .then((res) => {
-        const arr = res.data;
-        setdata(arr);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${baseurl}questions`)
+  //     .then((res) => {
+  //       const arr = res.apiData;
+  //       setdata(arr);
+  //     });
+  // }, []);
   return (
     <>
-      <Button
-        ref={btnRef}
-        colorScheme="teal"
-        size={["xs", "sm", "md"]}
-        onClick={handleclick}
-        isLoading={loadingState}
-      >
-        Search
-      </Button>
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        size={"md"}
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
+      {apiData && apiData.length && (
+        <>
+          {" "}
+          <Button
+            ref={btnRef}
+            colorScheme="teal"
+            size={["xs", "sm", "md"]}
+            onClick={handleclick}
+            isLoading={loadingState}
+          >
+            Search
+          </Button>
+          <Drawer
+            isOpen={isOpen}
+            placement="right"
+            size={"md"}
+            onClose={onClose}
+            finalFocusRef={btnRef}
+          >
+            <DrawerOverlay />
+            <DrawerContent>
+              <DrawerCloseButton />
 
-          <DrawerHeader>
-            {" "}
-            {searchdata[0] ? "Search Results" : "Try something different"}
-          </DrawerHeader>
+              <DrawerHeader>
+                {" "}
+                {searchdata && searchdata[0]
+                  ? "Search Results"
+                  : "Try something different"}
+              </DrawerHeader>
 
-          <DrawerBody>
-            {searchdata[0] ? (
-              <>
-                {searchdata.map((el, i) => (
-                  <Qcard
-                    key={i}
-                    problem={el.Problem}
-                    URL={el.URL}
-                    Done={el.Done}
-                  />
-                ))}{" "}
-              </>
-            ) : (
-              <Text
-                mt="6rem"
-                textAlign={"center"}
-                color="red.300"
-                m="3rem"
-                fontSize={"5xl"}
-              >
-                ☹ <br />
-                No Match Write correct keyword
-              </Text>
-            )}
-          </DrawerBody>
+              <DrawerBody>
+                {searchdata && searchdata[0] ? (
+                  <>
+                    {searchdata?.map((el, i) => (
+                      <Qcard
+                        key={i}
+                        problem={el.Problem}
+                        URL={el.URL}
+                        Done={el.Done}
+                      />
+                    ))}{" "}
+                  </>
+                ) : (
+                  <Text
+                    mt="6rem"
+                    textAlign={"center"}
+                    color="red.300"
+                    m="3rem"
+                    fontSize={"5xl"}
+                  >
+                    ☹ <br />
+                    No Match Write correct keyword
+                  </Text>
+                )}
+              </DrawerBody>
 
-          <DrawerFooter></DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+              <DrawerFooter></DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        </>
+      )}
     </>
   );
 }

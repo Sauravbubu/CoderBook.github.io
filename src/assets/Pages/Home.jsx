@@ -19,15 +19,10 @@ import { AuthContext } from "../../Context/AuthContext";
 import PopHover from "../../Components/Popover";
 import SearchInput from "../../Components/SearchInput";
 import { Link } from "react-router-dom";
-
-import NavBar from "../../Components/NavBar";
+import PopUpCharacter from "../../Components/svgavatarcomp/SvgCharacter";
 import LandingPage from "../../Components/LandingPage";
 import FrontendPart from "../../Components/FrontendPart";
 const Home = () => {
-  const { user, Logout } = useContext(AuthContext);
-  const { setsearchdata, searchdata } = useContext(SearchContext);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box
       bgColor="#28282B0"
@@ -37,6 +32,7 @@ const Home = () => {
       alignItems="center"
       justifyContent="center"
     >
+      <PopUpCharacter />
       {/* <Banner/> */}
       {/* <NavBar /> */}
       <LandingPage />

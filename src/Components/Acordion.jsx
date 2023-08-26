@@ -9,11 +9,11 @@ import {
   } from '@chakra-ui/react'
 const Acordion = ({notes}) => {
   return (
-    <Accordion  allowToggle>
+    <Accordion  w={['100px','240px']} allowToggle>
     <AccordionItem>
       <h2>
         <AccordionButton  _expanded={{ bg: 'pink.300', color: 'white' }}>
-          <Box flex='1'textAlign='left'>
+          <Box fontSize={["10px","20px"]} flex='1'textAlign='left'>
            See Notes
           </Box>
           <AccordionIcon />

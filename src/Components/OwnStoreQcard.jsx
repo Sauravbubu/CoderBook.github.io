@@ -1,18 +1,37 @@
 import React, { useState, useContext } from "react";
-import { DeleteIcon, ExternalLinkIcon, PlusSquareIcon, StarIcon } from "@chakra-ui/icons";
-import { Flex, Button, Box, Link, Text, Accordion, Tooltip } from "@chakra-ui/react";
+import {
+  DeleteIcon,
+  ExternalLinkIcon,
+  PlusSquareIcon,
+  StarIcon,
+} from "@chakra-ui/icons";
+import {
+  Flex,
+  Button,
+  Box,
+  Link,
+  Text,
+  Accordion,
+  Tooltip,
+} from "@chakra-ui/react";
 import { db } from "../FireBase";
-import { arrayUnion, doc, updateDoc,deleteDoc,deleteField } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  updateDoc,
+  deleteDoc,
+  deleteField,
+} from "firebase/firestore";
 import { AuthContext } from "../Context/AuthContext";
 import Acordion from "./Acordion";
 
-
-const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
-    // console.log(problem, URL, level,notes,solution);
+const OwnStoreQcard = ({ problem, URL, level, notes, solution }) => {
+  // console.log(problem, URL, level,notes,solution);
   const [done, setdone] = useState(false);
   const [bookmark, setbookmark] = useState(false);
-  const { user,topic,Owndata,setOwndata,coll,setcoll } = useContext(AuthContext);
-// console.log(Owndata);
+  const { user, topic, Owndata, setOwndata, coll, setcoll } =
+    useContext(AuthContext);
+  // console.log(Owndata);
   const userId = doc(db, "user", `${user?.email}`);
   //  console.log(user?.email,"Qcard")
   const handleBookmark = async (problem) => {
@@ -43,7 +62,7 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
       const results = Owndata.filter((item) => item.title !== problem);
       // console.log(results)
       await updateDoc(bookmarkRef, { questions: results });
-      setcoll(!coll)
+      setcoll(!coll);
     } catch (error) {
       console.log(error);
     }
@@ -51,9 +70,8 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
   return (
     <Flex
       boxShadow="Inner"
-      w="90%"
+      w={['100%',"90%"]}
       m="auto"
-    
       border="1px"
       borderColor="lightblue"
       mb="1rem"
@@ -65,7 +83,7 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
         <Text fontSize={["sm", "md", "xl"]} fontWeight="bold">
           {problem}
         </Text>
-        <Flex direction="column"   >
+        <Flex direction="column">
           <Link
             bg="tomato"
             borderRadius="lg"
@@ -73,28 +91,29 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
             p="0.31em"
             pr="-30px"
             href={URL}
+            fontSize={["10px", "20px"]}
             isExternal
           >
             Solve Now <ExternalLinkIcon mx="2px" />
           </Link>
-          <Button size="sm" variant="ghost">{level}</Button>
-          
+          <Button size="sm" variant="ghost">
+            Level: {level}
+          </Button>
         </Flex>
       </Flex>
-      <Flex direction="column" gap=".5rem" >   
-      
-      <Link
-            bg="blackAlpha.500"
-            borderRadius="lg"
-            color="whitesmoke"
-            p="0.2em"
-            fontSize={["sm", "xs", "md"]}
-            href={solution}
-            isExternal
-          >
-            Link to Solution <ExternalLinkIcon mx="2px" />
-          </Link>
-          <Acordion notes  ={notes} />
+      <Flex direction="column" gap=".5rem">
+        <Link
+          bg="blackAlpha.500"
+          borderRadius="lg"
+          color="whitesmoke"
+          p="0.2em"
+          fontSize={["10px", "20px"]}
+          href={solution}
+          isExternal
+        >
+          Link to Solution <ExternalLinkIcon mx="2px" />
+        </Link>
+        <Acordion notes={notes} />
       </Flex>
       <Flex
         flexDir={"column"}
@@ -115,18 +134,22 @@ const OwnStoreQcard = ({ problem, URL, level,notes,solution}) => {
             cursor="pointer"
             onClick={() => handleBookmark(problem)}
             variant="outline"
-            size={["sm", "xs", "md"]}
+            size={["xs", "md"]}
             rightIcon={<PlusSquareIcon />}
           >
             Bookmark it
           </Button>{" "}
-
-          <Tooltip  placement='left' ml="2rem" label='delete' stylefontSize='md' aria-label='Theme'>
-
-          <Button onClick={() => deleteBookmark(problem)}>
+          <Tooltip
+            placement="left"
+            ml="2rem"
+            label="delete"
+            stylefontSize="md"
+            aria-label="Theme"
+          >
+            <Button onClick={() => deleteBookmark(problem)}>
               <DeleteIcon />
             </Button>
-            </Tooltip>
+          </Tooltip>
         </Flex>
       </Flex>
     </Flex>

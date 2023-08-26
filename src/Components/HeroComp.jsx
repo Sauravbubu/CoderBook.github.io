@@ -33,7 +33,7 @@ export default function CallToActionWithIllustration() {
           CoderBook.in is an Onestop question bank for your coding and DSA
           interviews. I am a frontend Developer and currently focusing on
           frontend. Feel Free to Contribute Your Questions from your domain at{" "}
-          <span style={{ fontWeight: "bold", fontFamily: "Helvetica" }}>
+          <span style={{ fontWeight: "bold", color:'orange.400',fontFamily: "Helvetica" }}>
             workmailsaurav@gmail.com
           </span>
         </Text>

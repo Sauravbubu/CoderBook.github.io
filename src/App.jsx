@@ -4,6 +4,8 @@ import { useState } from "react";
 import AllRoutes from "./assets/Pages/Allroutes/AllRoutes";
 import { Footer } from "./Components/footer";
 import NavBar from "./Components/NavBar";
+import SearchContextProvider from "./Context/SeachContex"; // Adjust the import path
+import AuthContextProvider from "./Context/AuthContext"; // Adjust the import path
 
 function App() {
   const [count, setCount] = useState(0);

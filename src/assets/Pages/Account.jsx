@@ -28,12 +28,12 @@ const Account = () => {
   const [fdata, setfdata] = useState([]);
   const [mdata, setmdata] = useState([]);
   useEffect(() => {
-    axios.get(`${baseurl}questions?`).then((res) => {
-      // res.data.filter((qn)=>qn.questions)
-      // console.log(res.data)
+    // axios.get(`${baseurl}questions?`).then((res) => {
+    //   // res.data.filter((qn)=>qn.questions)
+    //   // console.log(res.data)
 
-      setmdata(res.data);
-    });
+    //   setmdata(res.data);
+    // });
 
     onSnapshot(doc(db, "user", `${user?.email}`), (doc) => {
       setfdata(doc.data()?.bookmarked);

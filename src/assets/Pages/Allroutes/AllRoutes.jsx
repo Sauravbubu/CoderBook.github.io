@@ -15,7 +15,14 @@ const QuizComponent = lazy(() => import("../quiz"));
 const AllRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <Suspense fallback={<Skeleton />}>
+            <Home />
+          </Suspense>
+        }
+      />
       {/* ... */}
       <Route
         path="/javascript"

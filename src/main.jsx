@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import SearchContextProvider from './Context/SeachContex'
 import "./index.css"
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
   
   <ChakraProvider >
   <BrowserRouter>
@@ -20,5 +20,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
     </ChakraProvider>
    
-  </React.StrictMode>
+  // </React.StrictMode>
 )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Tabs,
   TabList,
@@ -9,24 +9,27 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-
+import { SearchContext } from "../../Context/SeachContex";
 import axios from "axios";
 import Qcard from "../../Components/Qcard";
 import Skeletonn from "../../Components/Skeleton";
 import { baseurl } from "../../constant";
 
 const TabPannel = () => {
-  const [data, setdata] = useState([]);
+  const { apiData } = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState(true);
   const [tabIndex, setTabIndex] = React.useState(0);
 
+  // useEffect(() => {
+  //   axios.get(`${baseurl}questions`).then((res) => {
+  //     const arr = res.apiData;
+  //     setdata(arr);
+  //     setIsLoading(false);
+  //   });
+  // }, []);
   useEffect(() => {
-    axios.get(`${baseurl}questions`).then((res) => {
-      const arr = res.data;
-      setdata(arr);
-      setIsLoading(false);
-    });
-  }, []);
+    apiData && apiData.length && setIsLoading(false);
+  }, [apiData]);
 
   return (
     <>
@@ -35,7 +38,7 @@ const TabPannel = () => {
       ) : (
         <Tabs>
           <TabList bg="purple.600" color="white" w="100vw">
-            {data?.map((el, i) => (
+            {apiData?.map((el, i) => (
               <Tab key={i} overflow="hidden" fontSize={["xs", "xs", "sm"]}>
                 {el.topic}
               </Tab>
@@ -43,7 +46,7 @@ const TabPannel = () => {
           </TabList>
 
           <TabPanels p="1em">
-            {data?.map((el, i) => (
+            {apiData?.map((el, i) => (
               <TabPanel key={i}>
                 <Flex
                   direction="column"
