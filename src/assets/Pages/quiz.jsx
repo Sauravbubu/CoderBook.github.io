@@ -11,7 +11,7 @@ import { baseurl } from "../../constant";
 import Skeletonn from "../../Components/Skeleton";
 import axios from "axios";
 
-const QuizComponent = () => {
+const QuizComponent = ({endPoint}) => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(-1);
@@ -22,7 +22,7 @@ const QuizComponent = () => {
     useState(false);
 
   useEffect(() => {
-    axios.get(`${baseurl}jsquizlist`).then((res) => {
+    axios.get(`${baseurl+endPoint}`).then((res) => {
       const arr = res.data;
       const shuffledQuestions = shuffleArray(arr);
       setQuestions(shuffledQuestions);

@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { Illustration } from "./illustration";
+import CommonButton from "./Molecules/Button";
+import { TextConstants } from "../constant";
 
 export default function CallToActionWithIllustration() {
   return (
@@ -33,7 +35,13 @@ export default function CallToActionWithIllustration() {
           CoderBook.in is an Onestop question bank for your coding and DSA
           interviews. I am a frontend Developer and currently focusing on
           frontend. Feel Free to Contribute Your Questions from your domain at{" "}
-          <span style={{ fontWeight: "bold", color:'orange.400',fontFamily: "Helvetica" }}>
+          <span
+            style={{
+              fontWeight: "bold",
+              color: "orange.400",
+              fontFamily: "Helvetica",
+            }}
+          >
             workmailsaurav@gmail.com
           </span>
         </Text>
@@ -43,67 +51,27 @@ export default function CallToActionWithIllustration() {
           justifyContent="center"
           direction={{ base: "column", md: "row" }} // Stack direction changes with screen size
         >
-          <Button // Animated Button
-            rounded={"full"}
-            px={2}
-            w="100%"
-            colorScheme={"orange"}
-            className="animated-button"
-            transition="transform 0.2s"
-            _hover={{ transform: "scale(1.05)" }}
-          >
-            <Link to="/javascript">Javascript Questions</Link>
-          </Button>
-          <Button
-            rounded={"full"}
-            px={2}
-            w="100%"
-            colorScheme={"orange"}
-            className="animated-button"
-            transition="transform 0.2s"
-            _hover={{ transform: "scale(1.05)" }}
-          >
-            <Link to="/react">React Questions</Link>
-          </Button>
-          <Button
-            rounded={"full"}
-            px={2}
-            w="100%"
-            pl={12}
-            pr={12}
-            color="white"
-            colorScheme={"orange"}
-            className="animated-button"
-            transition="transform 0.2s"
-            _hover={{ transform: "scale(1.05)" }}
-          >
-            <Link to="/ui_machine_coding">Frontend Machine Coding</Link>
-          </Button>
-          <Button
-            rounded={"full"}
-            px={2}
-            w="100%"
-            color="white"
-            colorScheme={"orange"}
-            className="animated-button"
-            transition="transform 0.2s"
-            _hover={{ transform: "scale(1.05)" }}
-          >
-            <Link to="/dsa">DSA Collections</Link>
-          </Button>
-          {/* Quiz CTA Button */}
-          <Button
-            rounded={"full"}
-            px={2}
-            w="100%"
-            color="white"
-            colorScheme={"orange"}
-            className="animated-button"
-            transition="transform 0.2s"
-            _hover={{ transform: "scale(1.05)" }}
-          >
-            <Link to="/jsquiz">Take the Test</Link>
-          </Button>
+          {TextConstants?.homePageFrontendAllButtonsText?.map((items, i) => (
+            <CommonButton
+              key={i}
+              buttonText={items.title}
+              linkTo={items.link}
+            />
+          ))}
+        </Stack>
+        <Stack
+          spacing={6}
+          w="100%"
+          justifyContent="center"
+          direction={{ base: "column", md: "row" }} // Stack direction changes with screen size
+        >
+          {TextConstants?.homePageBackendAllButtonsText?.map((items, i) => (
+            <CommonButton
+              key={i}
+              buttonText={items.title}
+              linkTo={items.link}
+            />
+          ))}
         </Stack>
         <Flex w={"full"}>
           <Illustration

@@ -83,7 +83,15 @@ const AllRoutes = () => {
         path="/jsquiz"
         element={
           <Suspense fallback={<Skeleton />}>
-            <QuizComponent />
+            <QuizComponent endPoint="jsquizlist" />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/Javabackendquiz"
+        element={
+          <Suspense fallback={<Skeleton />}>
+            <QuizComponent endPoint="java-backend" />
           </Suspense>
         }
       />
